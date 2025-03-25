@@ -1,0 +1,6 @@
+flask
+twilio
+google-cloud-texttospeech
+google-cloud-speech
+requests
+gunicorn
