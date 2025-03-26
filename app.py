@@ -56,7 +56,8 @@ from google.cloud import texttospeech, speech
 import os
 import requests
 import base64
-
+import os
+print(os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"))
 app = Flask(__name__)
 
 # Google Cloud setup
