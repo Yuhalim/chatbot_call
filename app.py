@@ -1,69 +1,16 @@
-# from flask import Flask, request
-# from twilio.twiml.voice_response import VoiceResponse, Gather
-# from twilio.rest import Client
-# import os
-
-# app = Flask(__name__)
-
-# # Twilio Account SID and Auth Token
-# account_sid = os.environ.get('US63fe38ff944c9d34f97a5ac8b4c5cb51') #replace with your SID
-# auth_token = os.environ.get('5f62a6361c59be40f9ff7e652cc22dc9') #replace with your Auth Token
-
-# client = Client(account_sid, auth_token)
-
-# @app.route("/voice", methods=['GET', 'POST'])
-# def voice():
-#     """Handles incoming phone calls."""
-
-#     response = VoiceResponse()
-#     gather = Gather(input='speech', timeout=5, action='/process_speech') #timeout of 5 seconds
-
-#     gather.say("Hello! Welcome to the chatbot. Please tell me how I can help you.")
-#     response.append(gather)
-
-#     #If user doesn't say anything, or timeout occurs.
-#     response.say("Sorry, I didn't get that. Goodbye.")
-#     return str(response)
-
-# @app.route("/process_speech", methods=['GET', 'POST'])
-# def process_speech():
-#     """Processes the speech input from the user."""
-
-#     response = VoiceResponse()
-
-#     user_speech = request.form.get('SpeechResult')
-#     if user_speech:
-#         # Here, you'd typically send 'user_speech' to your NLP engine (e.g., Dialogflow, Lex)
-#         # and receive a response. For simplicity, we'll just echo the input.
-#         bot_response = f"You said: {user_speech}" #replace with your NLP response
-
-#         response.say(bot_response)
-#         response.say("Do you have any other questions?")
-#         gather = Gather(input='speech', timeout=5, action='/process_speech')
-#         response.append(gather) # loop the conversation.
-
-#     else:
-#         response.say("Sorry, I didn't get that. Goodbye.")
-
-#     return str(response)
-
-# if __name__ == "__main__":
-#     app.run(debug=True) #remove debug=True for production
-
 from flask import Flask, request
 from twilio.twiml.voice_response import VoiceResponse, Gather
 from google.cloud import texttospeech, speech
 import os
 import requests
 import base64
-import os
-print(os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"))
+
 app = Flask(__name__)
 
 # Google Cloud setup
 tts_client = texttospeech.TextToSpeechClient()
 speech_client = speech.SpeechClient()
-project_id = os.environ.get('chatbot-454814')
+project_id = os.environ.get('prime-cosmos-418312')
 language_code = "en-US"
 
 def text_to_speech_google(text):
