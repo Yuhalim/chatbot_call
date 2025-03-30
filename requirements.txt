@@ -2,5 +2,6 @@ flask
 twilio
 google-cloud-texttospeech
 google-cloud-speech
+python-dotenv
 requests
 gunicorn
