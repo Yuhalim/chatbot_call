@@ -71,4 +71,4 @@ def process_speech():
     return str(response)
 
 if __name__ == "__main__":
-    app.run(debug=True) #remove debug=True for production
+    app.run() #remove debug=True for production
