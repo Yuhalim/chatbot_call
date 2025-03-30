@@ -1,18 +1,23 @@
 import os
 import requests
 import base64
+import json
 from flask import Flask, request
 from twilio.twiml.voice_response import VoiceResponse, Gather
 from google.cloud import texttospeech, speech
+from google.oauth2 import service_account
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 
-# Google Cloud setup
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-tts_client = texttospeech.TextToSpeechClient()
-speech_client = speech.SpeechClient()
+# Load Google Credentials from environment variable
+google_creds = json.loads(os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
+credentials = service_account.Credentials.from_service_account_info(google_creds)
+
+# Initialize Google Cloud clients with credentials
+tts_client = texttospeech.TextToSpeechClient(credentials=credentials)
+speech_client = speech.SpeechClient(credentials=credentials)
 
 # Twilio Credentials
 TWILIO_PHONE_NUMBER = os.getenv("TWILIO_PHONE_NUMBER")
